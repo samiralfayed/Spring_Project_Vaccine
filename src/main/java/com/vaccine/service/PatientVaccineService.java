@@ -1,12 +1,9 @@
 package com.vaccine.service;
 
-
 import com.vaccine.model.PatientVaccine;
 import java.util.List;
 
-
 public interface PatientVaccineService {
-
 
     // Save or update a PatientVaccine
     PatientVaccine saveVaccine(PatientVaccine patientVaccine);
