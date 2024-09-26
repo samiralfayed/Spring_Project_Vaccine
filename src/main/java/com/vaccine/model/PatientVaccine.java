@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -25,10 +26,10 @@ public class PatientVaccine {
     private String vaccine;
     private String vaccineType;
 
-    // Using LocalDate for better date handling
+
     private LocalDate dateAdministered;
 
-    // No-args constructor is necessary for JPA
+
     public PatientVaccine() { }
 
     // Constructor with selected fields

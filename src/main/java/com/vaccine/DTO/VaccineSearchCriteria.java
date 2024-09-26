@@ -1,12 +1,32 @@
 package com.vaccine.DTO;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-
+@Setter
+@Getter
 public class VaccineSearchCriteria {
+
+
     private String vaccineType;
+
+    @NotNull(message = "Sex cannot be null")
     private String sex;
-    private int ageFrom;
-    private int ageTo;
+
+    private Integer ageFrom;
+    private Integer ageTo;
+
+
+    public VaccineSearchCriteria() {}
+
+    @Override
+    public String toString() {
+        return "VaccineSearchCriteria{" +
+                "vaccineType='" + vaccineType + '\'' +
+                ", sex='" + sex + '\'' +
+                ", ageFrom=" + ageFrom +
+                ", ageTo=" + ageTo +
+                '}';
+    }
 }

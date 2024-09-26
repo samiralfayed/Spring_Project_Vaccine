@@ -30,7 +30,7 @@ public class PatientVaccineServiceJPAImpl implements PatientVaccineService {
     @Override
     public PatientVaccine fetchVaccineById(long id) {
         Optional<PatientVaccine> vaccine = patientVaccineRepository.findById(id);
-        return vaccine.orElse(null);  // Return null if not found (or throw exception if preferred)
+        return vaccine.orElse(null);
     }
 
     // Delete PatientVaccine by ID
