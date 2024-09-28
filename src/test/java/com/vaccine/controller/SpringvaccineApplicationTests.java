@@ -8,6 +8,7 @@ class SpringvaccineApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

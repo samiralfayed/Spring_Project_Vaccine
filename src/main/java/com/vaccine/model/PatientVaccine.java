@@ -1,44 +1,26 @@
 package com.vaccine.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-@AllArgsConstructor
+@Entity
 @Getter
 @Setter
-@Entity
 public class PatientVaccine {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String patientName;
-    private String sex;
-    private int age;
-    private String vaccine;
-    private String vaccineType;
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
+    @ManyToOne
+    @JoinColumn(name = "vaccine_id")
+    private Vaccine vaccine;
 
-    private LocalDate dateAdministered;
-
-
-    public PatientVaccine() { }
-
-    // Constructor with selected fields
-    public PatientVaccine(String patientName, String sex, int age, String vaccine, String vaccineType, LocalDate dateAdministered) {
-        this.patientName = patientName;
-        this.sex = sex;
-        this.age = age;
-        this.vaccine = vaccine;
-        this.vaccineType = vaccineType;
-        this.dateAdministered = dateAdministered;
-    }
+    private Date vaccinationDate;
 }
