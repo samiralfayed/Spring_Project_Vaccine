@@ -9,5 +9,4 @@ import lombok.Setter;
 public class VaccineDTO {
     private Long id;
     private String name;
-    private Long vaccineTypeId;
 }

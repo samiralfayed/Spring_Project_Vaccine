@@ -24,14 +24,26 @@ public class VaccineController {
         return new ResponseEntity<>(vaccines, HttpStatus.OK);
     }
 
-    // Save a new vaccine
+    // Get vaccine by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Vaccine> getVaccineById(@PathVariable Long id) {
+        Vaccine vaccine = vaccineService.getVaccineById(id);
+        return new ResponseEntity<>(vaccine, HttpStatus.OK);
+    }
+
+    // Search vaccines by name
+    @GetMapping("/search")
+    public ResponseEntity<List<Vaccine>> searchVaccines(@RequestParam("name") String name) {
+        List<Vaccine> vaccines = vaccineService.searchVaccines(name);
+        return new ResponseEntity<>(vaccines, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Vaccine> createVaccine(@RequestBody VaccineDTO vaccineDTO) {
         Vaccine savedVaccine = vaccineService.saveVaccine(vaccineDTO);
         return new ResponseEntity<>(savedVaccine, HttpStatus.CREATED);
     }
 
-    // Delete a vaccine by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVaccine(@PathVariable Long id) {
         vaccineService.deleteVaccine(id);
