@@ -3,9 +3,7 @@ package com.vaccine.service;
 import com.vaccine.DTO.VaccineDTO;
 import com.vaccine.model.Vaccine;
 import com.vaccine.repository.VaccineJPARepo;
-import com.vaccine.repository.VaccineTypeJPARepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.vaccine.model.VaccineType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +14,6 @@ public class VaccineServiceImpl {
     @Autowired
     private VaccineJPARepo vaccineJPARepo;
 
-    @Autowired
-    private VaccineTypeJPARepo vaccineTypeJPARepo;
-
 
     public List<Vaccine> getAllVaccines() {
         return vaccineJPARepo.findAll();
@@ -26,14 +21,24 @@ public class VaccineServiceImpl {
 
 
     public Vaccine saveVaccine(VaccineDTO vaccineDTO) {
+        // Create a new Vaccine entity
         Vaccine vaccine = new Vaccine();
+
+        // Set properties from the DTO to the entity
         vaccine.setName(vaccineDTO.getName());
-
-        VaccineType vaccineType = vaccineTypeJPARepo.findById(vaccineDTO.getVaccineTypeId())
-                .orElseThrow(() -> new RuntimeException("Vaccine Type not found"));
-        vaccine.setVaccineType(vaccineType);
-
         return vaccineJPARepo.save(vaccine);
+
+    }
+
+
+    public Vaccine getVaccineById(Long id) {
+        return vaccineJPARepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vaccine not found"));
+    }
+
+
+    public List<Vaccine> searchVaccines(String name) {
+        return vaccineJPARepo.findByNameContainingIgnoreCase(name);
     }
 
 

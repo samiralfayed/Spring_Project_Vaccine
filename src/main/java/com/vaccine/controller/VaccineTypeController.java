@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/vaccine-types")
 public class VaccineTypeController {
+
     @Autowired
     private VaccineTypeServiceImpl vaccineTypeService;
 
@@ -23,14 +24,26 @@ public class VaccineTypeController {
         return new ResponseEntity<>(vaccineTypes, HttpStatus.OK);
     }
 
-    // Save a new vaccine type
+    // Get vaccine type by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<VaccineType> getVaccineTypeById(@PathVariable Long id) {
+        VaccineType vaccineType = vaccineTypeService.getVaccineTypeById(id);
+        return new ResponseEntity<>(vaccineType, HttpStatus.OK);
+    }
+
+    // Search vaccine types by name
+    @GetMapping("/search")
+    public ResponseEntity<List<VaccineType>> searchVaccineTypes(@RequestParam("name") String name) {
+        List<VaccineType> vaccineTypes = vaccineTypeService.searchVaccineTypes(name);
+        return new ResponseEntity<>(vaccineTypes, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<VaccineType> createVaccineType(@RequestBody VaccineTypeDTO vaccineTypeDTO) {
         VaccineType savedVaccineType = vaccineTypeService.saveVaccineType(vaccineTypeDTO);
         return new ResponseEntity<>(savedVaccineType, HttpStatus.CREATED);
     }
 
-    // Delete a vaccine type by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVaccineType(@PathVariable Long id) {
         vaccineTypeService.deleteVaccineType(id);
